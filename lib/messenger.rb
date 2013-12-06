@@ -10,8 +10,7 @@ class Messenger
   MAIL_OPTIONS = { :address              => "smtp.gmail.com",
                    :port                 => 587,
                    :user_name            => 'simon.woolf@gmail.com',
-                   #app-specific password token, will be revoked after the weekend
-                   :password             => 'idexurhfofsqbuzd',
+                   :password             => '',#[password removed]
                    :authentication       => 'plain',
                    :enable_starttls_auto => true  }
 
