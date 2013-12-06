@@ -11,9 +11,14 @@ class Takeaway
   end
 
   def validate_order(list: nil, total: nil)
-    actual_total = list.inject(0) do |total, dish| 
-      total += menu[dish[0]] * dish[1]
+    actual_total = list.inject(0) do |memo, item| 
+      item_price = menu[item[:dish]] or raise "#{item[:dish]} is not on the menu"
+      memo += item_price * [item[:quantity], 0].max
     end
-    total == actual_total
+    raise "Incorrect total" unless total == actual_total
+  end
+
+  def place_order(list: nil, total:nil)
+    validate_order(list:list, total:total)
   end
 end
