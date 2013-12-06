@@ -23,15 +23,19 @@ class Takeaway
 
   def place_order(list: nil, total:nil)
     validate_order(list:list, total:total)
-    send_success_message(Time.new + DELIVERY_DELAY, Messenger.new)
+    send_success_message(Time.new + DELIVERY_DELAY)
   end
 
-  def send_success_message(delivery_time, messenger)
+  def send_success_message(delivery_time)
     messenger.send_message(success_message(delivery_time))
   end
 
   def success_message(delivery_time)
     formatted_time = delivery_time.strftime("%H:%M")
     "Order placed. Expected delivery time: #{formatted_time}"
+  end
+
+  def messenger
+    Messenger.new
   end
 end

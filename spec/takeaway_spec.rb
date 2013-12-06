@@ -2,7 +2,8 @@ require 'takeaway'
 
 describe Takeaway do
   let(:takeaway){Takeaway.new}
-
+  let(:messenger_instance){double :messenger}
+  
   it 'should have some default menu items if instantiated with no menu' do
     takeaway = Takeaway.new
     #this reads way nicer than the expect syntax
@@ -43,9 +44,17 @@ describe Takeaway do
       total: 1000)}.should raise_error("escargot is not on the menu")
   end
 
-  it 'should send a text message if the order is valid' do
-    messenger = double :messenger
-    messenger.should_receive(:send_message).with("Order placed. Expected delivery time: 00:00")
-    takeaway.send_success_message(Time.new(0), messenger)
+  it 'should validate and send a success message when placing an order' do
+    takeaway.stub(:send_success_message)
+    takeaway.stub(:validate_order){true}
+    takeaway.should_receive(:validate_order)
+    takeaway.should_receive(:send_success_message)
+    takeaway.place_order
+  end
+
+  it 'should be able to send a text message' do
+    takeaway.stub(:messenger){messenger_instance}
+    messenger_instance.should_receive(:send_message).with("Order placed. Expected delivery time: 00:00")
+    takeaway.send_success_message(Time.new(0))
   end
 end
