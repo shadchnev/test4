@@ -9,7 +9,7 @@ class Array
     initial = params.pop
     return initial if self.empty?
     new_initial =  initial.nil? ? self[0] : block.call(initial, self[0])
-    self[1..-1].inject(new_initial, &block) 
+    self[1..-1].recursive_inject(new_initial, &block) 
   end
 
   def iterative_inject(*params, &block)
