@@ -1,4 +1,6 @@
 class Takeaway
+  DELIVERY_DELAY = 60*60
+  
   def initialize(menu=nil)
     @menu = menu
   end
@@ -20,5 +22,14 @@ class Takeaway
 
   def place_order(list: nil, total:nil)
     validate_order(list:list, total:total)
+    send_success_text(Time.new + DELIVERY_DELAY)
+  end
+
+  def send_success_text(delivery_time)
+  end
+
+  def success_text(delivery_time)
+    formatted_time = delivery_time.strftime("%H:%M")
+    puts "Order placed. Expected delivery time: #{formatted_time}"
   end
 end
