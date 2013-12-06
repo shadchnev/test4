@@ -1,4 +1,4 @@
-require 'test5'
+require 'inject'
 
 describe Array do
   let(:array) {Array[1,2,3,4,5]}
