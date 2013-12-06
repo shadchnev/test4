@@ -5,6 +5,7 @@ class Messenger
   DEFAULT_BUSINESS_EMAIL = 'simon.woolf+takeaway@gmail.com'
   DEFAULT_SUBJECT = 'Order confirmation'
   DEFAULT_MESSAGE = 'Order placed'
+  DELIVERY_METHOD = :smtp
 
   MAIL_OPTIONS = { :address              => "smtp.gmail.com",
                    :port                 => 587,
@@ -15,9 +16,6 @@ class Messenger
                    :enable_starttls_auto => true  }
 
   def initialize
-    Mail.defaults do
-      delivery_method :smtp, MAIL_OPTIONS
-    end
   end
 
   def send_message(message)
@@ -35,6 +33,7 @@ class Messenger
     mail.to = to
     mail.subject = subject
     mail.body = message
+    mail.delivery_method DELIVERY_METHOD, MAIL_OPTIONS
     mail.deliver!
   end
 

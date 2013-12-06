@@ -9,11 +9,13 @@ describe Messenger do
 
   before(:each) do
     Mail::TestMailer.deliveries.clear
-    Messenger.new.send_message("test message")
+    stub_const("Messenger::DELIVERY_METHOD", :test)
+    messenger = Messenger.new
+    messenger.send_message("test message")
   end
   
   it { should have_sent_email.from('simon.woolf+takeaway@gmail.com')\
                              .to('simon@simonwoolf.net')\
-                             .with_subject()\
+                             .with_subject('Order confirmation')\
                              .with_body("test message") }
 end
