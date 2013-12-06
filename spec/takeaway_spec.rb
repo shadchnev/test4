@@ -13,9 +13,6 @@ describe Takeaway do
     getwasted = Takeaway.new(menu={'vodka' => 250})
     getwasted.menu.should == {'vodka' => 250}
   end
-
-  xit 'should know the prices for the food it serves' do
-  end
   
   it "should not raise an error for a correct order" do
     lambda {takeaway.validate_order(
@@ -47,6 +44,8 @@ describe Takeaway do
   end
 
   it 'should send a text message if the order is valid' do
-
+    messenger = double :messenger
+    messenger.should_receive(:send_message).with("Order placed. Expected delivery time: 00:00")
+    takeaway.send_success_message(Time.new(0), messenger)
   end
 end

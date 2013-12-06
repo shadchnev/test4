@@ -23,10 +23,11 @@ class Takeaway
 
   def place_order(list: nil, total:nil)
     validate_order(list:list, total:total)
-    send_success_text(Time.new + DELIVERY_DELAY)
+    send_success_message(Time.new + DELIVERY_DELAY, Messenger.new)
   end
 
-  def send_success_message(delivery_time)
+  def send_success_message(delivery_time, messenger)
+    messenger.send_message(success_message(delivery_time))
   end
 
   def success_message(delivery_time)
