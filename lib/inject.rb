@@ -16,7 +16,7 @@ class Array
     if !block_given?
       # params is either [initial, op] or [op]
       operation = params.pop
-      block = lambda {|acc, e| acc.send(operation, e)} 
+      block = lambda {|acc, e| acc.send(operation, e)}
     end
     # params is either [initial] or []
     initial = params.pop
@@ -28,7 +28,6 @@ class Array
     accumulator
   end
 
-
-
+# Awesome.
 
 end

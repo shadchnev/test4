@@ -7,10 +7,13 @@ describe Takeaway do
   it 'should have some default menu items if instantiated with no menu' do
     takeaway = Takeaway.new
     #this reads way nicer than the expect syntax
+    # yep, it's funny this syntax is officially deprecated
     takeaway.menu.should_not be_empty
   end
 
   it 'should have the menu it\'s intantiated with' do
+    # here you're creating a local variable menu that has nothing to do with Takeaway
+    # Pointless?
     getwasted = Takeaway.new(menu={'vodka' => 250})
     getwasted.menu.should == {'vodka' => 250}
   end
@@ -53,7 +56,7 @@ describe Takeaway do
   end
 
   it 'should be able to send a text message' do
-    takeaway.stub(:messenger){messenger_instance}
+    takeaway.stub(:messenger){messenger_instance}    
     messenger_instance.should_receive(:send_message).with("Order placed. Expected delivery time: 00:00")
     takeaway.send_success_message(Time.new(0))
   end

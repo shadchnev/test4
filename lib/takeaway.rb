@@ -8,11 +8,13 @@ class Takeaway
     @menu = menu
   end
 
+  # it's just a constant, you don't have to create an accessor for it
   def menu
-    # Prices in pence
+    # Prices in pence – thanks god it's not in pounds :)
     @menu ||= DEFAULT_MENU
   end
 
+  # named arguments? pretty cool
   def validate_order(list: nil, total: nil)
     actual_total = list.inject(0) do |memo, item| 
       item_price = menu[item[:dish]] or raise "#{item[:dish]} is not on the menu"

@@ -10,7 +10,7 @@ class Messenger
   MAIL_OPTIONS = { :address              => "smtp.gmail.com",
                    :port                 => 587,
                    :user_name            => 'simon.woolf@gmail.com',
-                   :password             => '',#[password removed]
+                   :password             => '',#[password removed] # should be in the env variable!
                    :authentication       => 'plain',
                    :enable_starttls_auto => true  }
 
